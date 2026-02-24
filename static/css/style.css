@@ -1,3 +1,5 @@
-h1 {
-    color: red
+.mars-img {
+    background-image: url("img/img_2.png");
+    background-repeat: no-repeat;
+    padding-left: 155px;
 }

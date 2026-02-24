@@ -1,7 +1,9 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, redirect
+from forms import EmergencyAccess
 
 app = Flask(__name__)
 
+app.config['SECRET_KEY'] = 'yandexlyceum_secret_key'
 
 profs = [
     "инженер-исследователь",
@@ -36,6 +38,19 @@ def list_prof(list_p):
         'prof_list': profs
     }
     return render_template('list_prof.html', **params)
+
+
+@app.route('/login', methods=['GET', 'POST'])
+def login():
+    form = EmergencyAccess()
+    if form.validate_on_submit():
+        return redirect('/success')
+    return render_template('login.html', title='Аварийный доступ', form=form)
+
+
+@app.route('/success')
+def success():
+    return 'Авторизация успешна'
 
 
 if __name__ == '__main__':
